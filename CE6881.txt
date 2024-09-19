@@ -1,0 +1,822 @@
+!Software Version V200R022C00SPC500
+!Last configuration was updated at 2024-09-18 12:17:19+05:30 by denislav
+!Last configuration was saved at 2024-09-18 13:04:58+05:30
+#
+clock timezone IST add 05:30:00
+#
+sysname paris.maa
+#
+command-privilege level rearrange
+#
+ftp server enable
+ftp server source all-interface
+undo ftp ipv6 server source all-interface
+#
+info-center source debug channel 2 log level notification
+info-center loghost source LoopBack10
+info-center loghost 67.214.212.101 facility local4 port 44342
+info-center loghost domain logs.papertrailapp.com facility local4 port 44342
+#
+device board 1 board-type CE6881-48S6CQ
+#
+drop-profile default
+#
+dcb pfc
+#
+ntp server disable
+ntp ipv6 server disable
+ntp server source-interface all disable
+ntp ipv6 server source-interface all disable
+ntp unicast-server 95.216.192.15
+#
+cpu-defend policy 0
+ description 60
+ car packet-type arp pps 220
+ car packet-type icmp pps 440
+ car packet-type snmp pps 512
+#
+vlan batch 1027 to 1028 3510 4050
+#
+stp bpdu-filter default
+stp disable
+#
+rsa peer-public-key 172.17.1.12
+ public-key-code begin
+ 3082010A
+  02820101
+    00C21233 88E50AD4 2CE19AF0 65A97C66 EC5DED70 6E38896D EC0C8766 BCA9C7F2
+    51ECF211 83C36FC5 225D6470 280BF1AB 78EE904F BA54393B 15747DCF FB5FF201
+    B507E81F EA017DDE 2D69385C AAA56A4B B80A4330 0E3E4017 6A129D8B FB143420
+    DC27B7C2 268195C8 40874341 CBF874ED B952B184 75F35022 1D37578F E504B3C1
+    5B5367CD 13ECCAF4 EC90388E 9B385D33 11A53A51 3B51DCFE 744B6F34 F58EC06D
+    4BB121C3 BB3B5A3B 9F606EB6 D8743816 E07AAA9D EE06C3AA CBAE0187 9A67D7CA
+    18596FE4 86AEA0AA AD4B4543 1A855B5F 615F3B16 26C29AF1 2245F070 1D054B55
+    17D036C5 1769B487 D1B9D649 15DEEBA8 A6A8ABA8 01E1402B C30D3832 13088B08
+    BF
+  0203
+    010001
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 172.17.1.12
+ public-key-code begin
+  040EA532 2F9899B9 FD62EA2F 8D11AEA9 D06EC87F D7456C7C 6AF15F55 3E780E8A
+  249AED44 8CCE848F 1C8AAA7E 57EBE00D 4037D841 F7C38189 DE6D6D6D A0AFC2CA
+  52
+ public-key-code end
+ peer-public-key end
+#
+icmp name timestamp-reply send disable
+#
+set flow-stat interval 10
+#
+configuration file auto-save interval 120 delay 60
+configuration file auto-save backup-to-server server 172.17.1.12 transport-type sftp user swbckp password %^%#fwRUM=R3yD^TSkSNQu@IVEad&cI~*BRFt:Gnhd+.%^%# path /storage/switches/CHEN
+#
+telnet server disable
+telnet ipv6 server disable
+undo telnet server-source all-interface
+undo telnet ipv6 server-source all-interface
+#
+radius enable
+#
+hwtacacs enable
+#
+qos car 500Mbps cir 500000 kbps cbs 67108864 bytes
+qos car 1G cir 1000000 kbps cbs 134217728 bytes
+qos car 2G cir 2000000 kbps cbs 268435456 bytes
+qos car 3G cir 3000000 kbps cbs 402653184 bytes
+qos car 4G cir 4000000 kbps cbs 536870912 bytes
+qos car 5G cir 5000000 kbps cbs 536870912 bytes
+qos car 6G cir 6000000 kbps cbs 536870912 bytes
+qos car 7G cir 7000000 kbps cbs 536870912 bytes
+qos car 8G cir 8000000 kbps cbs 536870912 bytes
+qos car 9G cir 9000000 kbps cbs 536870912 bytes
+qos car 10G cir 10000000 kbps cbs 536870912 bytes
+qos car 12G cir 12000000 kbps cbs 536870912 bytes
+qos car 14G cir 14000000 kbps cbs 536870912 bytes
+qos car 16G cir 16000000 kbps cbs 536870912 bytes
+qos car 18G cir 18000000 kbps cbs 536870912 bytes
+qos car 20G cir 20000000 kbps cbs 536870912 bytes
+qos car 30G cir 30000000 kbps cbs 536870912 bytes
+qos car 60G cir 60000000 kbps cbs 536870912 bytes
+qos car 100G cir 100000000 kbps cbs 536870912 bytes
+#
+cpu-defend-policy 0
+#
+assign forward enp sflow enable slot 1
+#
+sflow agent ip 172.16.4.6
+#
+sflow source ip 172.16.4.6
+#
+sflow collector 1 ip 172.17.1.2 description IXPM
+#
+qos burst-mode enhanced slot 1
+#
+diffserv domain default
+#
+radius server group ts-aaa
+ radius server shared-key-cipher %^%#pt~LBdeo264[kMXB"muAi]r|3Totr9fGd6LLln'Q%^%#
+ radius server authentication 172.17.1.6 1812
+ radius server accounting 172.17.1.6 1813
+ radius server retransmit 2
+#
+hwtacacs server template ts-aaa
+ hwtacacs server authentication 172.17.1.6
+ hwtacacs server authorization 172.17.1.6
+ hwtacacs server accounting 172.17.1.6
+ hwtacacs server shared-key cipher %^%#oEC2ZZ"yR=os5PJed~WBUGW4'3>/t';tSF9!(">D%^%#
+ hwtacacs server user-name domain-excluded
+#
+vlan 1027
+ description Local PNI vPort for Reisnet Broadband (Facebook)
+#
+vlan 1028
+ description Local PNI vPort for Reisnet Broadband (Google)
+#
+vlan 3510
+ description EIX Members
+#
+vlan 4050
+ description OSPF Link to oxygen.maa
+#
+dhcp server request-packet all-interface disable
+#
+acl number 3001
+ description Allowed Pools for VTY
+ rule 5 permit ip source 172.16.0.0 0.0.255.255
+ rule 5 description OSPF MGMT
+ rule 10 permit ip source 172.17.0.0 0.0.255.255
+ rule 10 description OSPF MGMT
+ rule 15 permit ip source 10.0.0.0 0.255.255.255
+ rule 15 description Some devices MGMT
+ rule 20 permit ip source 91.239.13.0 0.0.0.255
+ rule 20 description BG Office
+ rule 25 permit ip source 103.77.111.0 0.0.0.255
+ rule 25 description Extreme Network
+ rule 30 permit ip source 103.56.228.0 0.0.3.255
+ rule 30 description Excitel Network
+ rule 35 permit ip source 123.253.156.0 0.0.0.255
+ rule 35 description Extreme Network Mumbai
+ rule 40 permit ip source 180.179.178.34 0
+ rule 40 description Public IP Mumbai Mikrotik
+ rule 45 permit ip source 103.203.231.18 0
+ rule 45 description Public IP Mumbai_GPX Mikrotik
+#
+acl number 3002
+ description for snmp access
+ rule 5 permit ip source 172.17.0.0 0.0.255.255
+ rule 5 description OSPF MGMT
+ rule 10 permit ip source 172.16.0.0 0.0.255.255
+ rule 10 description OSPF MGMT
+ rule 15 permit ip source 103.77.111.0 0.0.0.255
+ rule 15 description Extreme Network Delhi
+#
+acl number 4001
+ description L2_customer_filters
+ rule 5 permit type arp
+ rule 10 permit type ip
+ rule 15 permit type ipv6
+ rule 100 deny type 0x9998
+ rule 100 description unknown_frame
+ rule 105 deny type 0x0604
+ rule 105 description unknown_frame
+ rule 110 deny type 0x9003
+ rule 110 description unknown_frame
+ rule 115 deny destination-mac 0180-c200-0000
+ rule 115 description STP
+ rule 120 deny destination-mac 0100-0ccc-cccd
+ rule 120 description CiscoSTP
+ rule 125 deny destination-mac 0100-0ccc-cccc
+ rule 125 description CDP
+ rule 130 deny destination-mac 0180-c200-000e
+ rule 130 description LLDP
+ rule 135 deny destination-mac 0180-c200-000a
+ rule 135 description LLC
+ rule 145 deny destination-mac ab00-0002-0000
+ rule 145 description "MOP RC - Maintenance Operation Protocol"
+ rule 150 deny type 0x061b
+ rule 150 description unknown_frame
+ rule 155 deny type 0x8809
+ rule 155 description LACP
+ rule 160 deny type 0x8863
+ rule 160 description PPPoE
+ rule 165 deny type 0xfffa
+ rule 165 description RTL Loopback
+ rule 170 deny type 0x88bf
+ rule 170 description unknown_frame
+#
+aaa
+ local-user x3me123 password irreversible-cipher $1c$GZDN"a|JaB$PDu45-SS}QlboNQInvB6M6[mF2A6eJbfDVGaF!~Y$
+ local-user x3me123 service-type telnet ssh
+ local-user x3me123 level 3
+ local-user x3me123 ftp-directory flash:
+ #
+ authentication-scheme default
+ #
+ authentication-scheme hwtc-tc
+  authentication-mode hwtacacs local
+ #
+ authentication-scheme radius
+  authentication-mode radius
+ #
+ authentication-scheme auth
+  authentication-mode radius
+ #
+ authorization-scheme default
+ #
+ authorization-scheme hwtc-tc
+  authorization-mode hwtacacs local
+  authorization-cmd 15 hwtacacs local
+ #
+ accounting-scheme default
+ #
+ accounting-scheme hwtc-tc
+  accounting-mode hwtacacs
+ #
+ accounting-scheme x3me
+  accounting-mode radius
+ #
+ domain default
+  authentication-scheme radius
+ #
+ domain default_admin
+  authentication-scheme hwtc-tc
+  authorization-scheme hwtc-tc
+  accounting-scheme hwtc-tc
+  hwtacacs server ts-aaa
+ #
+ domain huawei
+  authentication-scheme auth
+  accounting-scheme x3me
+  radius server group ts-aaa
+ #
+ recording-scheme hwtc-tc
+  recording-mode hwtacacs ts-aaa
+ #
+ cmd recording-scheme hwtc-tc
+#
+stack
+#
+license
+#
+interface Vlanif4050
+ mtu 9212
+ description OSPF link to oxygen.maa
+ ip address 172.16.28.157 255.255.255.252
+#
+interface MEth0/0/0
+ shutdown
+#
+interface Eth-Trunk1
+ description Link: To oxygen.maa
+ port link-type trunk
+ undo port trunk allow-pass vlan 1
+ port trunk allow-pass vlan 1027 to 1028 3510 4050
+ stp disable
+ stp bpdu-filter enable
+ mode lacp-static
+#
+interface Eth-Trunk2
+ description Link: To Hongkong Saega Technology(Wangsu)
+ port default vlan 3510
+ stp disable
+ mode lacp-static
+#
+interface Eth-Trunk3
+ description Link: to Fastly Peering Service - 1 {EXTREMEIX-MAA183-1}
+ port default vlan 3510
+ stp disable
+ mode lacp-static
+#
+interface Eth-Trunk4
+ description Link: To Facebook Peering Service 3 {Link id :- 2023215130}
+ port default vlan 3510
+ stp disable
+ mode lacp-static
+#
+interface Eth-Trunk5
+ description Link: To Facebook Peering Service 4 {Link id :- 2023215129}
+ port default vlan 3510
+ stp disable
+ mode lacp-static
+#
+interface Eth-Trunk9
+ description Link: to Fastly Peering Service - 2 {EXTREMEIX-MAA183-2}
+ port default vlan 3510
+ stp disable
+ mode lacp-static
+#
+interface 10GE1/0/1
+ description Extreme IX: Zees Broadband
+ port link-type hybrid
+ port hybrid pvid vlan 3510
+ undo port hybrid untagged vlan 1
+ port hybrid untagged vlan 3510
+ stp disable
+ stp bpdu-filter enable
+ mac-address flapping trigger error-down
+ storm control broadcast min-rate 100 max-rate 200
+ storm control multicast min-rate 100 max-rate 200
+ storm control unknown-unicast min-rate kbps 20000 max-rate kbps 50000
+ storm control interval 1
+ storm control action block
+ storm control enable log
+ mac-address learning disable action discard
+ qos lr cir 3000000 kbps cbs 402653184 bytes outbound
+ qos car inbound 3G
+ traffic-filter acl 4001 inbound
+ device transceiver 10GBASE-FIBER
+#
+interface 10GE1/0/2
+ description Extreme IX: VIVA Communications
+ port link-type hybrid
+ port hybrid pvid vlan 3510
+ undo port hybrid untagged vlan 1
+ port hybrid untagged vlan 3510
+ stp disable
+ stp bpdu-filter enable
+ mac-address flapping trigger error-down
+ storm control broadcast min-rate 100 max-rate 200
+ storm control multicast min-rate 100 max-rate 200
+ storm control unknown-unicast min-rate kbps 1000 max-rate kbps 2000
+ storm control interval 1
+ storm control action block
+ storm control enable log
+ mac-address learning disable action discard
+ loopback-detect enable
+ qos lr cir 3000000 kbps cbs 402653184 bytes outbound
+ qos car inbound 3G
+ traffic-filter acl 4001 inbound
+ device transceiver 10GBASE-FIBER
+#
+interface 10GE1/0/3
+ description Link: To Hongkong Saega Technology(Wangsu) (member of eth-trunk2) {Wangsu-SIFY DC TDL - Extreme - Fib 004}
+ eth-trunk 2
+ sflow sampling collector 1
+ sflow sampling rate 65535
+ sflow sampling inbound
+ device transceiver 10GBASE-FIBER
+#
+interface 10GE1/0/4
+ description Link: to Fastly Peering Service - 1 (member of eth-trunk3) {EXTREMEIX-MAA183-1}
+ eth-trunk 3
+ sflow sampling collector 1
+ sflow sampling rate 65535
+ sflow sampling inbound
+ device transceiver 10GBASE-FIBER
+#
+interface 10GE1/0/5
+ description Link: to Fastly Peering Service - 2 (member of eth-trunk9) {EXTREMEIX-MAA183-2}
+ eth-trunk 9
+ sflow sampling collector 1
+ sflow sampling rate 65535
+ sflow sampling inbound
+ device transceiver 10GBASE-FIBER
+#
+interface 10GE1/0/6
+ description Extreme IX: Reisnet Broadband
+ port link-type hybrid
+ port hybrid pvid vlan 3510
+ port hybrid tagged vlan 1027 to 1028
+ undo port hybrid untagged vlan 1
+ port hybrid untagged vlan 3510
+ stp disable
+ stp bpdu-filter enable
+ mac-address flapping trigger error-down
+ storm control broadcast min-rate 100 max-rate 200
+ storm control multicast min-rate 100 max-rate 200
+ storm control unknown-unicast min-rate kbps 1000 max-rate kbps 2000
+ storm control interval 1
+ storm control action block
+ storm control enable log
+ mac-address learning disable action discard
+ loopback-detect enable
+ qos lr cir 3000000 kbps cbs 402653184 bytes outbound
+ qos car inbound 3G
+ traffic-filter acl 4001 inbound
+ device transceiver 10GBASE-FIBER
+#
+interface 10GE1/0/7
+ description Extreme IX: Virtel Communications
+ port link-type hybrid
+ port hybrid pvid vlan 3510
+ undo port hybrid untagged vlan 1
+ port hybrid untagged vlan 3510
+ stp disable
+ stp bpdu-filter enable
+ mac-address flapping trigger error-down
+ storm control broadcast min-rate 100 max-rate 200
+ storm control multicast min-rate 100 max-rate 200
+ storm control unknown-unicast min-rate kbps 1000 max-rate kbps 2000
+ storm control interval 1
+ storm control action block
+ storm control enable log
+ mac-address learning disable action discard
+ loopback-detect enable
+ qos lr cir 1000000 kbps cbs 134217728 bytes outbound
+ qos car inbound 1G
+ traffic-filter acl 4001 inbound
+ device transceiver 10GBASE-FIBER
+#
+interface 10GE1/0/8
+ shutdown
+ device transceiver 1000BASE-X
+#
+interface 10GE1/0/9
+ description Extreme IX: Speech Tell Communication
+ port link-type hybrid
+ port hybrid pvid vlan 3510
+ undo port hybrid untagged vlan 1
+ port hybrid untagged vlan 3510
+ stp disable
+ stp bpdu-filter enable
+ mac-address flapping trigger error-down
+ storm control broadcast min-rate 100 max-rate 200
+ storm control multicast min-rate 100 max-rate 200
+ storm control unknown-unicast min-rate kbps 20000 max-rate kbps 50000
+ storm control interval 1
+ storm control action block
+ storm control enable log
+ mac-address learning disable action discard
+ qos lr cir 1000000 kbps cbs 134217728 bytes outbound
+ qos car inbound 1G
+ traffic-filter acl 4001 inbound
+ device transceiver 10GBASE-FIBER
+#
+interface 10GE1/0/10
+ shutdown
+#
+interface 10GE1/0/11
+ shutdown
+#
+interface 10GE1/0/12
+ shutdown
+#
+interface 10GE1/0/13
+ shutdown
+#
+interface 10GE1/0/14
+ shutdown
+#
+interface 10GE1/0/15
+ shutdown
+#
+interface 10GE1/0/16
+ shutdown
+#
+interface 10GE1/0/17
+ shutdown
+#
+interface 10GE1/0/18
+ shutdown
+#
+interface 10GE1/0/19
+ shutdown
+#
+interface 10GE1/0/20
+ shutdown
+#
+interface 10GE1/0/21
+ shutdown
+#
+interface 10GE1/0/22
+ shutdown
+#
+interface 10GE1/0/23
+ shutdown
+#
+interface 10GE1/0/24
+ shutdown
+#
+interface 10GE1/0/25
+ shutdown
+ device transceiver 1000BASE-X
+#
+interface 10GE1/0/26
+ shutdown
+#
+interface 10GE1/0/27
+ shutdown
+#
+interface 10GE1/0/28
+ shutdown
+#
+interface 10GE1/0/29
+ shutdown
+#
+interface 10GE1/0/30
+ shutdown
+#
+interface 10GE1/0/31
+ shutdown
+#
+interface 10GE1/0/32
+ shutdown
+#
+interface 10GE1/0/33
+ description Extreme IX: Glo Internet Services
+ port link-type hybrid
+ port hybrid pvid vlan 3510
+ undo port hybrid untagged vlan 1
+ port hybrid untagged vlan 3510
+ stp disable
+ stp bpdu-filter enable
+ mac-address flapping trigger error-down
+ storm control broadcast min-rate 100 max-rate 200
+ storm control multicast min-rate 100 max-rate 200
+ storm control unknown-unicast min-rate kbps 20000 max-rate kbps 50000
+ storm control interval 1
+ storm control action block
+ storm control enable log
+ mac-address learning disable action discard
+ qos lr cir 1000000 kbps cbs 134217728 bytes outbound
+ qos car inbound 1G
+ traffic-filter acl 4001 inbound
+ device transceiver 1000BASE-T
+#
+interface 10GE1/0/34
+ shutdown
+#
+interface 10GE1/0/35
+ shutdown
+#
+interface 10GE1/0/36
+ shutdown
+#
+interface 10GE1/0/37
+ shutdown
+ device transceiver 10GBASE-FIBER
+#
+interface 10GE1/0/38
+ shutdown
+#
+interface 10GE1/0/39
+ shutdown
+#
+interface 10GE1/0/40
+ description Extreme IX: SOFTECH INFOSOL
+ port link-type hybrid
+ port hybrid pvid vlan 3510
+ undo port hybrid untagged vlan 1
+ port hybrid untagged vlan 3510
+ stp disable
+ stp bpdu-filter enable
+ mac-address flapping trigger error-down
+ storm control broadcast min-rate 100 max-rate 200
+ storm control multicast min-rate 100 max-rate 200
+ storm control unknown-unicast min-rate kbps 20000 max-rate kbps 50000
+ storm control interval 1
+ storm control action block
+ storm control enable log
+ mac-address learning disable action discard
+ qos lr cir 3000000 kbps cbs 402653184 bytes outbound
+ qos car inbound 3G
+ traffic-filter acl 4001 inbound
+ device transceiver 10GBASE-FIBER
+#
+interface 10GE1/0/41
+ shutdown
+#
+interface 10GE1/0/42
+ description Extreme IX: Netzy Internet Services
+ port link-type hybrid
+ port hybrid pvid vlan 3510
+ undo port hybrid untagged vlan 1
+ port hybrid untagged vlan 3510
+ stp disable
+ stp bpdu-filter enable
+ mac-address flapping trigger error-down
+ storm control broadcast min-rate 100 max-rate 200
+ storm control multicast min-rate 100 max-rate 200
+ storm control unknown-unicast min-rate kbps 20000 max-rate kbps 50000
+ storm control interval 1
+ storm control action block
+ storm control enable log
+ mac-address learning disable action discard
+ traffic-filter acl 4001 inbound
+ device transceiver 1000BASE-T
+#
+interface 10GE1/0/43
+ shutdown
+#
+interface 10GE1/0/44
+ shutdown
+ device transceiver 10GBASE-FIBER
+#
+interface 10GE1/0/45
+ description Extreme IX: E Net Entertainment
+ port link-type hybrid
+ port hybrid pvid vlan 3510
+ undo port hybrid untagged vlan 1
+ port hybrid untagged vlan 3510
+ stp disable
+ stp bpdu-filter enable
+ mac-address flapping trigger error-down
+ storm control broadcast min-rate 100 max-rate 200
+ storm control multicast min-rate 100 max-rate 200
+ storm control unknown-unicast min-rate kbps 1000 max-rate kbps 2000
+ storm control interval 1
+ storm control action block
+ storm control enable log
+ mac-address learning disable action discard
+ loopback-detect enable
+ traffic-filter acl 4001 inbound
+ device transceiver 10GBASE-FIBER
+#
+interface 10GE1/0/46
+ description Extreme IX: Airgenie Communications
+ port link-type hybrid
+ port hybrid pvid vlan 3510
+ undo port hybrid untagged vlan 1
+ port hybrid untagged vlan 3510
+ stp disable
+ stp bpdu-filter enable
+ mac-address flapping trigger error-down
+ storm control broadcast min-rate 100 max-rate 200
+ storm control multicast min-rate 100 max-rate 200
+ storm control unknown-unicast min-rate kbps 1000 max-rate kbps 2000
+ storm control interval 1
+ storm control action block
+ storm control enable log
+ mac-address learning disable action discard
+ loopback-detect enable
+ traffic-filter acl 4001 inbound
+ device transceiver 10GBASE-FIBER
+#
+interface 10GE1/0/47
+ description Extreme IX: SP Internet Technologies
+ port link-type hybrid
+ port hybrid pvid vlan 3510
+ undo port hybrid untagged vlan 1
+ port hybrid untagged vlan 3510
+ stp disable
+ stp bpdu-filter enable
+ mac-address flapping trigger error-down
+ storm control broadcast min-rate 100 max-rate 200
+ storm control multicast min-rate 100 max-rate 200
+ storm control unknown-unicast min-rate kbps 20000 max-rate kbps 50000
+ storm control interval 1
+ storm control action block
+ storm control enable log
+ mac-address learning disable action discard
+ qos lr cir 3000000 kbps cbs 402653184 bytes outbound
+ qos car inbound 3G
+ traffic-filter acl 4001 inbound
+ device transceiver 10GBASE-FIBER
+#
+interface 10GE1/0/48
+ description Extreme IX: Rmax Broadband Pvt Ltd
+ port link-type hybrid
+ port hybrid pvid vlan 3510
+ undo port hybrid untagged vlan 1
+ port hybrid untagged vlan 3510
+ stp disable
+ stp bpdu-filter enable
+ mac-address flapping trigger error-down
+ storm control broadcast min-rate 100 max-rate 200
+ storm control multicast min-rate 100 max-rate 200
+ storm control unknown-unicast min-rate kbps 20000 max-rate kbps 50000
+ storm control interval 1
+ storm control action block
+ storm control enable log
+ mac-address learning disable action discard
+ qos lr cir 3000000 kbps cbs 402653184 bytes outbound
+ qos car inbound 3G
+ traffic-filter acl 4001 inbound
+ device transceiver 10GBASE-FIBER
+#
+interface 100GE1/0/1
+ description Link: To oxygen.maa (Member of Eth-Trunk 1)
+ eth-trunk 1
+ device transceiver 100GBASE-FIBER
+#
+interface 100GE1/0/2
+ description Link: To oxygen.maa (Member of Eth-Trunk 1)
+ eth-trunk 1
+ device transceiver 100GBASE-FIBER
+#
+interface 100GE1/0/3
+ description Link: To Facebook Peering Service 3 (Member of Eth-Trunk 4) {Link id :- 2023215130}
+ eth-trunk 4
+ sflow sampling collector 1
+ sflow sampling rate 65535
+ sflow sampling inbound
+ device transceiver 100GBASE-FIBER
+#
+interface 100GE1/0/4
+ description Link: To Facebook Peering Service 4 (Member of Eth-Trunk 5) {Link id :- 2023215129}
+ eth-trunk 5
+ sflow sampling rate 65535
+ sflow sampling inbound
+ device transceiver 100GBASE-FIBER
+#
+interface 100GE1/0/5
+ shutdown
+ device transceiver 100GBASE-FIBER
+#
+interface 100GE1/0/6
+ shutdown
+#
+interface LoopBack10
+ ip address 172.16.4.6 255.255.255.255
+#
+interface NULL0
+#
+mac-address static a46d-a487-4018 10GE1/0/6 vlan 1027
+mac-address static a46d-a487-4019 10GE1/0/6 vlan 1028
+mac-address static 488f-5a1a-45a1 10GE1/0/40 vlan 3510
+mac-address static 48a9-8a50-3084 10GE1/0/9 vlan 3510
+mac-address static 744d-2888-e92f 10GE1/0/48 vlan 3510
+mac-address static 744d-28ee-bfd7 10GE1/0/42 vlan 3510
+mac-address static 789a-189d-881d 10GE1/0/47 vlan 3510
+mac-address static 789a-18cf-ff66 10GE1/0/2 vlan 3510
+mac-address static 88bc-c1aa-38d3 10GE1/0/46 vlan 3510
+mac-address static a46d-a487-4015 10GE1/0/6 vlan 3510
+mac-address static a46d-a487-401a 10GE1/0/6 vlan 3510
+mac-address static c4a4-0274-3a14 10GE1/0/45 vlan 3510
+mac-address static dc2c-6e9e-226d 10GE1/0/33 vlan 3510
+mac-address static e48d-8c01-afea 10GE1/0/1 vlan 3510
+mac-address static f41e-5719-dd05 10GE1/0/7 vlan 3510
+#
+ospf 10 router-id 172.16.4.6
+ area 0.0.0.0
+  network 172.16.4.6 0.0.0.0
+  network 172.16.28.156 0.0.0.3
+#
+snmp-agent
+snmp-agent acl 3002
+snmp-agent local-engineid 800007DB03382028A3CC31
+snmp-agent community read cipher %^%#)AD$*}o0u,@LyD7`LkQ&WGd(MQV+h(uIG}N(Z)I2]=X2K\eTbGsgPbWsFih~}e9N8Gm6-3{v$DDei0|;%^%# alias __CommunityAliasName_01_60044
+#
+snmp-agent sys-info contact support@x3me.net
+snmp-agent sys-info location Sify, Chennai
+snmp-agent sys-info version all
+#
+snmp-agent protocol source-status all-interface
+snmp-agent protocol source-status ipv6 all-interface
+#
+snmp-agent proxy protocol source-status all-interface
+undo snmp-agent proxy protocol source-status ipv6 all-interface
+#
+stelnet server enable
+sftp server enable
+scp server enable
+ssh server rsa-key min-length 3072
+ssh server authentication-type keyboard-interactive enable
+ssh user x3me123
+ssh user x3me123 authentication-type all
+ssh user x3me123 service-type all
+ssh server-source all-interface
+ssh ipv6 server-source all-interface
+ssh authorization-type default aaa
+#
+ssh server cipher aes256_gcm aes128_gcm aes256_ctr aes192_ctr aes128_ctr
+ssh server hmac sha2_512 sha2_256
+ssh server key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521
+#
+ssh server publickey rsa_sha2_256 rsa_sha2_512
+#
+ssh server dh-exchange min-len 3072
+#
+ssh client first-time enable
+ssh client peer 172.17.1.12 assign rsa-key 172.17.1.12
+ssh client peer 172.17.1.12 assign ecc-key 172.17.1.12
+#
+ssh client publickey ecc rsa
+#
+ssh client cipher aes256_gcm aes128_gcm aes256_ctr aes192_ctr aes128_ctr
+ssh client hmac sha2_512 sha2_256
+ssh client key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521
+#
+dns resolve
+dns server 8.8.8.8
+#
+nqa test-instance x3me Link_oxygen.maa
+ test-type icmp
+ description icmp to oxygen.maa
+ destination-address ipv4 172.16.28.158
+ source-address ipv4 172.16.28.157
+ send-trap testfailure
+ fail-percent 1
+ probe-count 10
+ datasize 1472
+ frequency 60
+ start now
+#
+user-interface con 0
+ authentication-mode password
+ set authentication password cipher $1c$V!|xJ}T-CQ$+CfcA^[a~)o%bXXqd=x3(|6~A_+Vd;t2I3"81z71$
+#
+user-interface vty 0 4
+ acl 3001 inbound
+ authentication-mode aaa
+ history-command max-size 100
+ idle-timeout 20 0
+ screen-length 50
+ protocol inbound ssh
+#
+warranty
+#
+return
